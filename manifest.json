@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "chiritori",
   "version": "0",
-  "description": "chrome.browsingData.remove",
+  "description": "remove browsingData",
   "icons": {
     "128": "128.png"
   },
