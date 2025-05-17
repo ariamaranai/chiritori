@@ -27,8 +27,8 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs => {
       close(
         chrome.storage.session.set({
           [url]: [cache, cacheStorage, localStorage, indexedDB, serviceWorkers, cookies]
-        }
-      ));
+        })
+      );
     }
   });
 });
