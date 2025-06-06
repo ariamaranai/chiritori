@@ -2,16 +2,14 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs => {
   let { url } = tabs[0];
   chrome.storage.session.get(url, ({ [url]: v }) => {
     let nodes = document.body.childNodes;
-    if (v) {
-      let i = 6;
+    let i = 6;
+    if (v)
       while (
         nodes[--i].firstChild.checked = v[i],
         i
       );
-    }
     b.onclick = () => {
-      let i = 6;
-      let checks = Array(6);
+      let checks = Array(i = 6);
       while (
         checks[--i] = nodes[i].firstChild.checked,
         i
