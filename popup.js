@@ -1,34 +1,30 @@
 chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs => {
   let { url } = tabs[0];
   chrome.storage.session.get(url, ({ [url]: v }) => {
-    let inputs = document.getElementsByTagName("input");
+    let nodes = document.body.childNodes;
     if (v) {
-      let i = 0;
+      let i = 6;
       while (
-        inputs[i].checked = v[i],
-        ++i < 6
+        nodes[--i].firstChild.checked = v[i],
+        i
       );
     }
     b.onclick = () => {
-      let cache = inputs[0].checked;
-      let cacheStorage = inputs[1].checked;
-      let localStorage = inputs[2].checked;
-      let indexedDB = inputs[3].checked;
-      let serviceWorkers = inputs[4].checked;
-      let cookies = inputs[5].checked;
-      chrome.browsingData.remove({ origins: [url] }, {
-        cache,
-        cacheStorage,
-        localStorage,
-        indexedDB,
-        serviceWorkers,
-        cookies
-      });
-      close(
-        chrome.storage.session.set({
-          [url]: [cache, cacheStorage, localStorage, indexedDB, serviceWorkers, cookies]
-        })
+      let i = 6;
+      let checks = Array(6);
+      while (
+        checks[--i] = nodes[i].firstChild.checked,
+        i
       );
+      chrome.browsingData.remove({ origins: [url] }, {
+        cache: checks[0],
+        cacheStorage: checks[1],
+        localStorage: checks[2],
+        indexedDB: checks[3],
+        serviceWorkers: checks[4],
+        cookies: checks[5]
+      });
+      close(chrome.storage.session.set({ [url]: checks }));
     }
   });
 });
