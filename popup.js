@@ -9,7 +9,8 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs => {
         i
       );
     b.onclick = () => {
-      let checks = Array(i = 6);
+      i = 6;
+      let checks = [0,0,0,0,0,0];
       while (
         checks[--i] = nodes[i].firstChild.checked,
         i
