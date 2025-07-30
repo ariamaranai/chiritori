@@ -2,15 +2,15 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs => {
   let { url } = tabs[0];
   chrome.storage.session.get(url, ({ [url]: v }) => {
     let nodes = document.body.childNodes;
-    let i = 6;
+    let i = 7;
     if (v)
       while (
         nodes[--i].firstChild.checked = v[i],
         i
       );
     b.onclick = () => {
-      i = 6;
-      let checks = [0,0,0,0,0,0];
+      let i = 7;
+      let checks = [0,0,0,0,0,0,0];
       while (
         checks[--i] = nodes[i].firstChild.checked,
         i
@@ -23,6 +23,7 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs => {
         serviceWorkers: checks[4],
         cookies: checks[5]
       });
+      checks[6] && chrome.runtime.sendMessage(url);
       close(chrome.storage.session.set({ [url]: checks }));
     }
   });

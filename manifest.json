@@ -2,15 +2,19 @@
   "manifest_version": 3,
   "name": "chiritori",
   "version": "0",
-  "description": "Remove browsingData",
+  "description": "Remove browsingData and history",
   "icons": {
     "128": "128.png"
   },
   "permissions": [
     "browsingData",
+    "history",
     "storage",
     "tabs"
   ],
+  "background": {
+    "service_worker": "bg.js"
+  },
   "action": {
     "default_popup": "popup.htm"
   }
