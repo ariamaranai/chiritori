@@ -1,5 +1,4 @@
-chrome.runtime.onMessage.addListener(url => {
-  let { origin } = new URL(url);
+chrome.runtime.onMessage.addListener(origin => {
   chrome.history.search({
     text: origin,
     maxResults: 100000,
@@ -10,7 +9,7 @@ chrome.runtime.onMessage.addListener(url => {
     while (i < results.length) {
       let { url } = results[i];
       url.slice(0, len) == origin &&
-      chrome.history.deleteUrl({ url })
+      chrome.history.deleteUrl({ url });
       ++i;
     }
   })
