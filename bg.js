@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(origin => {
     let len = origin.length;
     let i = 0;
     while (i < results.length) {
-      let { url } = results[i];
+      let url = results[i].url;
       url.slice(0, len) == origin &&
       chrome.history.deleteUrl({ url });
       ++i;
