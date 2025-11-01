@@ -1,19 +1,20 @@
 chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs => {
   let { origin } = new URL(tabs[0].url);
   let nodes = document.body.childNodes;
-  let i = 0;
   let checks = localStorage.getItem(origin);
-  if (checks)
+  if (checks) {
+    let i = 7;
     while (
-      nodes[i].firstChild.checked = +checks[i],
-      ++i < 7
+      nodes[--i].firstChild.checked = +checks[i],
+      i
     );
+  }
   b.onclick = () => {
     let checks = [0,0,0,0,0,0,0];
-    let i = 0;
+    let i = 7;
     while (
-      checks[i] = nodes[i].firstChild.checked,
-      ++i < 7
+      checks[--i] = nodes[i].firstChild.checked,
+      i
     );
     chrome.browsingData.remove({ origins: [origin] }, {
       cache: checks[0],
