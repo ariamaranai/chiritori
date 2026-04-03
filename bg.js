@@ -4,13 +4,12 @@ chrome.runtime.onMessage.addListener(origin => {
     maxResults: 100000,
     startTime: 0
   }, results => {
-    let len = origin.length;
-    let i = 0;
-    while (i < results.length) {
-      let url = results[i].url;
-      url.slice(0, len) == origin &&
-      chrome.history.deleteUrl({ url });
-      ++i;
-    }
+    let url;
+    let i = results.length;
+    while (
+      (url = results[--i].url).startsWith(origin) &&
+      chrome.history.deleteUrl({ url }),
+      i
+    );
   })
 });
